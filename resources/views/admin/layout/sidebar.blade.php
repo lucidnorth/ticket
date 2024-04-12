@@ -29,7 +29,7 @@
                 @endcan
             @endrole
 
-            @role('Organizer')
+            @role('vendor')
                 @can('organization_dashboard')
                     <li class="{{ request()->is('organization/home') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('organization/home') }}">
@@ -38,7 +38,7 @@
                     </li>
                 @endcan
             @endrole
-            @role('Organizer')
+            @role('vendor')
                 @can('Book_tickets')
                     <li class="{{ request()->is('book-ticket') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('book-ticket') }}">
@@ -60,91 +60,9 @@
                         <i class="fas fa-user-friends"></i> <span>{{ __('Users') }}</span>
                     </a>
                 </li>
-            @endcan
-            <li class="{{ request()->is('orders*') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ url('orders') }}">
-                    <i class="fas fa-columns"></i><span>{{ __('Ticket Orders') }}</span>
-                </a>
-            </li>
-            @can('category_access')
-                <li class="{{ request()->is('category*') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ url('category') }}">
-                        <i class="fas fa-glass-cheers"></i> <span>{{ __('Events Categories') }}</span>
-                    </a>
-                </li>
+                
             @endcan
 
-            <li class="{{ request()->is('get-notification*') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ url('get-notification') }}">
-                    <i class="fas fa-bell"></i> <span>{{ __('Send Notification') }}</span>
-                </a>
-            </li>
-            @can('event_access')
-                <li class="{{ request()->is('events*') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ url('events') }}">
-                        <i class="fas fa-calendar-alt"></i> <span>{{ __('Events') }}</span>
-                    </a>
-                </li>
-            @endcan
-            <li class="{{ request()->is('app-user*') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ url('app-user') }}">
-                    <i class="fas fa-users"></i> <span>{{ __('App Users') }}</span>
-                </a>
-            </li>
-            @if (Auth::user()->hasRole('Organizer'))
-                <li class="{{ request()->is('scanner*') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ url('scanner') }}">
-                        <i class="fas fa-id-card"></i> <span>{{ __('Scanner') }}</span>
-                    </a>
-                </li>
-            @endif
-            @if (Auth::user()->hasRole('Organizer'))
-            <li class="{{ request()->is('/organization/income') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ url('/organization/income') }}">
-                    <i class="fa-solid fa-money-bill-wave"></i> <span>{{ __('Income') }}</span>
-                </a>
-            </li>
-        @endif
-            @can('blog_access')
-                <li class="{{ request()->is('blog*') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ url('blog') }}">
-                        <i class="fas fa-file-alt"></i><span>{{ __('Blog') }}</span>
-                    </a>
-                </li>
-            @endcan
-            @can('coupon_access')
-                <li class="{{ request()->is('coupon*') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ url('coupon') }}">
-                        <i class="fas fa-tags"></i> <span>{{ __('Coupon') }}</span>
-                    </a>
-                </li>
-            @endcan
-            @can('banner_access')
-                <li class="{{ request()->is('banner*') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ url('banner') }}">
-                        <i class="fas fa-images"></i><span>{{ __('Banner') }}</span>
-                    </a>
-                </li>
-            @endcan
-            <li class="{{ request()->is('user-review') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ url('user-review') }}">
-                    <i class="fas fa-star"></i> <span>{{ __('Review') }}</span>
-                </a>
-            </li>
-            {{-- @role('Organizer')
-                <li class="{{ request()->is('organization/income') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ url('organization/income') }}">
-                        <i class="fas fa-chart-pie"></i> <span>{{ __('Income') }}</span>
-                    </a>
-                </li>
-            @endrole --}}
-            @role('admin')
-                <li class="{{ request()->is('event-review') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ url('event-review') }}">
-                        <i class="fas fa  fa-flag"></i> <span>{{ __('Reported Events') }}</span>
-                    </a>
-                </li>
-            @endrole
             @role('admin')
                 @can('admin_report')
                     <li class="nav-item dropdown {{ request()->is('admin-report*') ? 'active' : '' }}">
@@ -165,7 +83,116 @@
                 @endcan
             @endrole
 
-            @role('Organizer')
+            <hr style="border: 0.1px solid black;">
+
+            @can('event_access')
+                <li class="{{ request()->is('events*') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ url('events') }}">
+                        <i class="fas fa-calendar-alt"></i> <span>{{ __('Create Events') }}</span>
+                    </a>
+                </li>
+            @endcan
+            <li class="{{ request()->is('orders*') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ url('orders') }}">
+                    <i class="fas fa-columns"></i><span>{{ __('Ticket Orders') }}</span>
+                </a>
+            </li>
+            @can('category_access')
+                <li class="{{ request()->is('category*') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ url('category') }}">
+                        <i class="fas fa-glass-cheers"></i> <span>{{ __('Events Categories') }}</span>
+                    </a>
+                </li>
+            @endcan
+
+            <li class="{{ request()->is('app-user*') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ url('app-user') }}">
+                    <i class="fas fa-users"></i> <span>{{ __('Customers') }}</span>
+                </a>
+            </li>
+
+            @can('tax_access')
+                <li class="{{ request()->is('tax*') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ url('tax') }}">
+                        <i class="fas fa-hand-holding-usd"></i><span>{{ __('Tax') }}</span>
+                    </a>
+                </li>
+            @endcan
+
+            @can('coupon_access')
+                <li class="{{ request()->is('coupon*') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ url('coupon') }}">
+                        <i class="fas fa-tags"></i> <span>{{ __('Coupon') }}</span>
+                    </a>
+                </li>
+            @endcan
+
+            @can('blog_access')
+                <li class="{{ request()->is('blog*') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ url('blog') }}">
+                        <i class="fas fa-file-alt"></i><span>{{ __('Blog') }}</span>
+                    </a>
+                </li>
+            @endcan
+           
+            @can('banner_access')
+                <li class="{{ request()->is('banner*') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ url('banner') }}">
+                        <i class="fas fa-images"></i><span>{{ __('Banner') }}</span>
+                    </a>
+                </li>
+            @endcan
+
+            <li class="{{ request()->is('user-review') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ url('user-review') }}">
+                    <i class="fas fa-star"></i> <span>{{ __('Ratings & Comments') }}</span>
+                </a>
+            </li>
+
+            @role('admin')
+                <li class="{{ request()->is('event-review') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ url('event-review') }}">
+                        <i class="fas fa  fa-flag"></i> <span>{{ __('Reported Events') }}</span>
+                    </a>
+                </li>
+            @endrole
+
+            <hr style="border: 0.1px solid black;">
+
+            <li class="{{ request()->is('get-notification*') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ url('get-notification') }}">
+                    <i class="fas fa-bell"></i> <span>{{ __('Send Notification') }}</span>
+                </a>
+            </li>
+           
+            
+            @if (Auth::user()->hasRole('vendor'))
+                <li class="{{ request()->is('scanner*') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ url('scanner') }}">
+                        <i class="fas fa-id-card"></i> <span>{{ __('Scanner') }}</span>
+                    </a>
+                </li>
+            @endif
+            @if (Auth::user()->hasRole('vendor'))
+            <li class="{{ request()->is('/organization/income') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ url('/organization/income') }}">
+                    <i class="fa-solid fa-money-bill-wave"></i> <span>{{ __('Income') }}</span>
+                </a>
+            </li>
+        @endif
+            
+            
+            {{-- @role('vendor')
+                <li class="{{ request()->is('organization/income') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ url('organization/income') }}">
+                        <i class="fas fa-chart-pie"></i> <span>{{ __('Income') }}</span>
+                    </a>
+                </li>
+            @endrole --}}
+           
+           
+
+            @role('vendor')
                 @can('organization_report')
                     <li class="nav-item dropdown {{ request()->is('organization-report*') ? 'active' : '' }}">
                         <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-chart-bar"></i>
@@ -189,20 +216,15 @@
                     </a>
                 </li>
             @endcan
-            @can('tax_access')
-                <li class="{{ request()->is('tax*') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ url('tax') }}">
-                        <i class="fas fa-hand-holding-usd"></i><span>{{ __('Tax') }}</span>
-                    </a>
-                </li>
-            @endcan
+            <hr style="border: 0.1px solid black;">
             @can('feedback_access')
                 <li class="{{ request()->is('feedback*') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ url('feedback') }}">
-                        <i class="fas fa-comments"></i><span>{{ __('Feedback') }}</span>
+                        <i class="fas fa-comments"></i><span>{{ __('Vendor Feedback') }}</span>
                     </a>
                 </li>
             @endcan
+            <hr style="border: 0.1px solid black;">
             @can('faq_access')
                 <li class="{{ request()->is('faq*') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ url('faq') }}">
@@ -210,6 +232,7 @@
                     </a>
                 </li>
             @endcan
+            <hr style="border: 0.1px solid black;">
             @can('language_access')
                 <li class="{{ request()->is('language*') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ url('language') }}">

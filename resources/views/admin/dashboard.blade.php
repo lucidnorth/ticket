@@ -78,7 +78,7 @@
                                 <i class="fas fa-user-shield"></i>
                             </div>
                             <h4>{{ $master['organizations'] }}</h4>
-                            <div class="card-description">{{ __('Organizations') }}</div>
+                            <div class="card-description">{{ __('Vendors') }}</div>
                         </div>
                     </div>
                 </div>
